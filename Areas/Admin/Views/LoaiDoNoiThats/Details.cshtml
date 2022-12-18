@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div ng-app="myapp" ng-controller="myctrl">
+    <h2>Chi tiết {{datas.TenLDNT}}</h2>
+    <hr />
+    <dl>
+        <dt>
+            Tên loại đồ nội thất
+        </dt>
+
+        <dd>
+            {{datas.TenLDNT}}
+        </dd>
+
+        <dt>
+            Mô tả
+        </dt>
+
+        <dd>
+            {{datas.MoTa}}
+        </dd>
+
+    </dl>
+
+    <a ng-click="edit()" class="btn btn-success"><i class="fa fa-pen-square"></i> Sửa</a>
+    <a class="btn btn-facebook" href="~/Admin/LoaiDoNoiThats/Index"><i class="fa fa-backward"></i> Quay lại</a>
+</div>
+
+@section Scripts{
+
+    <script>
+        var myapp = angular.module("myapp", []);
+        myapp.controller("myctrl", function ($scope, $http) {
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            $http({
+                url: "/Admin/LoaiDoNoiThats/DetailsData/?id=" + id,
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.datas = res.data;
+                console.log($scope.datas);
+            });
+
+            $scope.edit = function () {
+                window.location.href = "/Admin/LoaiDoNoiThats/Edit/"+id ;
+            }
+        });
+    </script>
+}

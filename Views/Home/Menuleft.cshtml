@@ -1,0 +1,8 @@
+﻿@model IEnumerable<DoAn3.Models.LoaiDoNoiThat>
+
+@foreach (var item in Model)
+{
+    <li>
+        <a href="/Home/Category/@item.MaLDNT">@item.TenLDNT</a>
+    </li>
+}

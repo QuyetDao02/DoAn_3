@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DoAn3.Models.HoaDonNhap>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ngaylap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TongTien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhanVien.TenNV)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TinhTrang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ngaylap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TongTien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhanVien.TenNV)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaHDN }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaHDN }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaHDN })
+        </td>
+    </tr>
+}
+
+</table>

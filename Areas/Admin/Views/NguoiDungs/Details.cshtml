@@ -1,0 +1,65 @@
+﻿@model DoAn3.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div ng-app="myapp" ng-controller="myctrl">
+    <h2>Chi tiết {{datas.TenLDNT}}</h2>
+    <hr />
+    <dl class="">
+        <dt>
+            Tên đăng nhập
+        </dt>
+
+        <dd>
+            {{datas.username}}
+        </dd>
+
+        <dt>
+            Mật khẩu
+        </dt>
+
+        <dd>
+            {{datas.pass}}
+        </dd>
+
+        <dt>
+            Quyền
+        </dt>
+
+        <dd>
+            {{datas.roles}}
+        </dd>
+
+
+    </dl>
+    <a ng-click="edit()" class="btn btn-success"><i class="fa fa-pen-square"></i> Sửa</a>
+    <a class="btn btn-facebook" href="~/Admin/NguoiDungs/Index"><i class="fa fa-backward"></i> Quay lại</a>
+</div>
+
+@section Scripts{
+
+    <script>
+        var myapp = angular.module("myapp", []);
+        myapp.controller("myctrl", function ($scope, $http) {
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            $http({
+                url: "/Admin/NguoiDungs/DetailsData/?id=" + id,
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.datas = res.data;
+                console.log($scope.datas);
+            });
+
+            $scope.edit = function () {
+                window.location.href = "/Admin/NguoiDungs/Edit/"+id ;
+            }
+        });
+    </script>
+}

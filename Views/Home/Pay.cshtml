@@ -1,0 +1,166 @@
+﻿@model IEnumerable<DoAn3.Models.ChiTietDonHangBan>
+
+@{
+    ViewBag.Title = "Pay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Cart Products</h2>
+                        <p>Home <span>-</span>Cart Products</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!--================Cart Area =================-->
+@using (Html.BeginForm("OrderNow", "Home", FormMethod.Post))
+{
+    <section class="cart_area padding_top">
+
+        <div class="container">
+            <div class="cart_inner ">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-2">Hình ảnh</th>
+                                <th scope="col" class="col-4">Tên đồ nội thất</th>
+                                <th scope="col" class="col-2">Giá</th>
+                                <th scope="col" class="col-2">Số lượng</th>
+                                <th scope="col" class="col-2">Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                double tongtien = 0;
+                                double gia = 0;
+                                int soluong = 0;
+                                int tongsl = 0;
+                            }
+                            @foreach (var i in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="/@i.DoNoiThat.HinhAnh" style="width:100px" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>@i.DoNoiThat.TenDNT</div>
+                                    </td>
+                                    <td>
+                                        <div>@i.DoNoiThat.Gia</div>
+                                    </td>
+                                    <td>
+                                        <div>@i.SoLuong</div>
+                                        @{ 
+                                            soluong = Convert.ToInt32(i.SoLuong);
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (i.SoLuong == 1)
+                                        {
+                                            <h5>@i.DoNoiThat.Gia</h5>
+                                            gia = Convert.ToDouble(i.DoNoiThat.Gia);
+                                        }
+                                        else
+                                        {
+                                            <h5>@i.Gia</h5>
+                                            gia = Convert.ToDouble(i.Gia);
+                                        }
+
+                                    </td>
+
+                                    <td class="text-center">
+                                    </td>
+                                </tr>
+                                tongtien += gia;
+                                tongsl += soluong;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row ">
+                    <div class="col-md-8">
+                        <h3>Thông tin người nhận</h3>
+                        @{var user = ViewBag.User;}
+                        <div class="form-group my-2">
+                            <label>Họ tên người nhận:</label><br />
+                            <input name="customerName" class="w-75" type="text" value="@user.KhachHang.TenKH" readonly placeholder="" required="required" />
+                        </div>
+                        <div class="form-group my-2">
+                            <label>Email:</label><br />
+                            <input name="Email" class="w-75" type="email" value="@user.KhachHang.email" readonly placeholder="" required="required" />
+                        </div>
+                        @{ if (user.KhachHang.Sdt == null)
+                            {
+                                <div class="form-group my-2">
+                                    <label>Số điện thoại:</label><br />
+                                    <input name="Sdt" class="w-75" type="number" value="Nhập số điện thoại"  placeholder="" required="required" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group my-2">
+                                    <label>Số điện thoại:</label><br />
+                                    <input name="Sdt" class="w-75" type="number" value="@user.KhachHang.Sdt" readonly placeholder="" required="required" />
+                                </div>
+                            }
+                        }
+                        @{ if (user.KhachHang.Diachi == null)
+                            {
+                                <div class="form-group my-2">
+                                    <label>Địa chỉ:</label><br />
+                                    <input name="Adress" class="w-75" type="text" value="Nhập địa chỉ"  placeholder="" required="required" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group my-2">
+                                    <label>Địa chỉ:</label><br />
+                                    <input name="Adress" class="w-75" type="text" value="@user.KhachHang.Diachi" readonly placeholder="" required="required" />
+                                </div>
+                            }
+                        }
+                        <div>
+                            <label>Mô tả</label><br />
+                            <textarea style="width:100%" name="Description" placeholder=""></textarea>
+                        </div>
+                        <div class="checkbox">
+                            <label class="checkbox-inline p-1" for="1"><input name="updates" id="1" type="checkbox"> Kiểm tra các khoản thanh toán</label>
+                            <label class="checkbox-inline p-1" for="2"><input name="news" id="2" type="checkbox"> Thanh toán khi giao hàng</label>
+                            <label class="checkbox-inline p-1" for="3"><input name="news" id="3" type="checkbox"> PayPal</label>
+                        </div>
+                        @*<div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="#">Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+        </div>*@
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4>Tổng giá tiền: <span>@tongtien VNĐ</span></h4>
+                        <h4>Tổng số lượng sản phẩm: <span>@tongsl</span></h4>
+                        <button class="btn btn-success" type="submit">Đặt mua</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+}
+<!--================End Cart Area =================-->

@@ -1,0 +1,252 @@
+﻿@model DoAn3.Models.DoNoiThat
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid" ng-app="appdetail" ng-controller="ctrldetail">
+    <form ng-submit="savedata()">
+        @Html.AntiForgeryToken()
+        <h4>Sửa thông tin đồ nội thất</h4>
+        <hr />
+
+        <div class="d-flex">
+            <div class="col-md-6">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            Tên đồ nội thất
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="products.TenDNT" />
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            Loại đồ nội thất
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-control" ng-model="products.MaLDNT" ng-options="x.MaLDNT as x.TenLDNT for x in listlsp"></select>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            Nhà cung cấp
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-control" ng-model="products.MaNCC" ng-options="x.MaNCC as x.TenNCC for x in listncc">
+                            </select>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            Giá
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="products.Gia" />
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            Kích cỡ
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="products.Kichco" />
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            Số lượng
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="products.soluong" />
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <div class="col-md-12">
+                    Hình ảnh
+                </div>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="image" ng-model="products.HinhAnh" />
+
+                    <button type="button" class="btn-default" ng-click="ChooseImage()">Chọn ảnh</button>
+                    <br />
+                    <br />
+                    <img style="width:100px;height:100px;" src="{{products.HinhAnh}}" />
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-12">
+                    Mô tả
+                </div>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="mota" ng-model="products.MoTa" />
+                </div>
+                <br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </form>
+</div>
+@section scripts{
+    <script>
+        CKEDITOR.replace('mota')
+    </script>
+    <script type="text/javascript">
+        var myapp = angular.module('appdetail', [])
+        myapp.controller('ctrldetail', function ($scope, $http, $httpParamSerializerJQLike) {
+
+            $scope.products = {};
+
+
+            //Lấy mã sản phẩm hiển thị thông tin
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            $http({
+                url: "/Admin/DoNoiThats/DetailsData/?id=" + id,
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.products = res.data;
+                console.log($scope.products)
+            });
+
+            //Thêm dữ liệu vào cơ sở dữ liệu
+            $scope.savedata = function () {
+                var des = CKEDITOR.instances.mota.getData();
+                $scope.products.MoTa = des;
+                Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                $scope.products.__RequestVerificationToken = Token;
+                dataRequest = $scope.products;
+                console.log(dataRequest);
+                $http({
+                    method: 'POST',
+                    url: '/Admin/DoNoiThats/Edit',
+                    data: $httpParamSerializerJQLike(dataRequest),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+                }).then(function (res) {
+                    if (res.data == false) {
+                        alert("Lỗi sửa đổi bản ghi");
+                    }
+                    else {
+                        alert("Thay đổi thông tin sản phẩm thành công");
+                        window.location.href = "/Admin/DoNoiThats/Index";
+                        window.location.reload;
+                    }
+                });
+
+            }
+
+            //Lấy danh sách loại sản phẩm
+            $http({
+                url: "/Admin/LoaiDoNoiThats/getAll",
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.listlsp = res.data;
+                console.log($scope.listlsp);
+            });
+
+            $http({
+                url: "/Admin/NhaCungCaps/getAll",
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.listncc = res.data;
+                console.log($scope.listncc);
+            });
+            //Chọn file ckfinder
+            $scope.ChooseImage = function () {
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (fileUrl) {
+                    $scope.products.HinhAnh = fileUrl;
+                }
+                finder.popup();
+            }
+            ////Upload file
+            //$scope.listImages = []
+            //$scope.UploadFiles = function (files) {
+            //    $scope.SelectedFiles = files;
+
+            //    $scope.listImages = files.map((x) => {
+            //        return '/UploadFiles/files/' + x.name;
+            //    })
+
+            //    $scope.products.Images = '/UploadFiles/files/' + files[0].name;
+            //    console.log($scope.listImages);
+            //    if ($scope.SelectedFiles && $scope.SelectedFiles.length) {
+            //        Upload.upload({
+            //            url: '/Admin/Products/Uploadfiles',
+            //            data: {
+            //                files: $scope.SelectedFiles
+            //            }
+            //        }).then(function (response) {
+            //            $timeout(function () {
+            //                $scope.Result = response.data;
+            //            });
+            //        }, function (response) {
+            //            if (response.status > 0) {
+            //                var errorMsg = response.status + ': ' + response.data;
+            //                alert(errorMsg);
+            //            }
+            //        }, function (evt) {
+            //            var element = angular.element(document.querySelector('#dvProgress'));
+            //            $scope.Progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            //            element.html('<div style="width: ' + $scope.Progress + '%">' + $scope.Progress + '%</div>');
+            //        }
+            //        );
+            //    }
+
+            //};
+
+        });
+
+
+
+
+    </script>
+}

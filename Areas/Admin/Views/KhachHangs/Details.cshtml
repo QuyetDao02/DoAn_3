@@ -1,0 +1,78 @@
+﻿@model DoAn3.Models.KhachHang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-app="myapp" ng-controller="myctrl">
+    <h2>Chi tiết thông tin {{datas.TenKH}}</h2>
+    <hr />
+    <dl class="">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenKH)
+        </dt>
+
+        <dd>
+            {{datas.TenKH}}
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sdt)
+        </dt>
+
+        <dd>
+            {{datas.Sdt}}
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            {{datas.email}}
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diachi)
+        </dt>
+
+        <dd>
+            {{datas.Diachi}}
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NguoiDung.username)
+        </dt>
+
+        <dd>
+            {{datas.username}}
+        </dd>
+
+    </dl>
+    <a ng-click="edit()" class="btn btn-success"><i class="fa fa-pen-square"></i> Sửa</a>
+    <a class="btn btn-facebook" href="~/Admin/KhachHangs/Index"><i class="fa fa-backward"></i> Quay lại</a>
+</div>
+
+@section Scripts{
+
+    <script>
+        var myapp = angular.module("myapp", []);
+        myapp.controller("myctrl", function ($scope, $http) {
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            $http({
+                url: "/Admin/KhachHangs/DetailsData/?id=" + id,
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.datas = res.data;
+                console.log($scope.datas);
+            });
+
+            $scope.edit = function () {
+                window.location.href = "/Admin/KhachHangs/Edit/"+id ;
+            }
+        });
+    </script>
+}

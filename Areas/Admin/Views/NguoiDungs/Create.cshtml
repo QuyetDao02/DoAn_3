@@ -1,0 +1,80 @@
+﻿@model DoAn3.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm thông tin User</h2>
+
+<div class="container-fluid" ng-app="myApp" ng-controller="myctrl">
+
+    <form ng-submit="addData()">
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                Tên đăng nhập
+                <div class="col-md-10">
+                    <input type="text" ng-model="dulieu.username" class="form-control" />
+                </div>
+            </div>
+    
+            <div class="form-group">
+                Mật khẩu
+                <div class="col-md-10">
+                    <input type="text" ng-model="dulieu.pass" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                Quyền
+                <div class="col-md-10">
+                    <input type="number" min="0" max="1" ng-model="dulieu.roles" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-warning" type="submit">Thêm mới</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </form>
+    @section scripts {
+
+        <script>
+            var myApp = angular.module('myApp', []);
+            myApp.controller('myctrl', function ($scope, $http, $httpParamSerializerJQLike) {
+                $scope.dulieu = {};
+                $scope.addData = function () {
+                    Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                    $scope.dulieu.__RequestVerificationToken = Token;
+                    dataRequest = $scope.dulieu;
+                    console.log(dataRequest);
+                    $http({
+                        method: 'POST',
+                        url: '/Admin/NguoiDungs/Create',
+                        data: $httpParamSerializerJQLike(dataRequest),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+                    }).then(function (res) {
+                        if (res.data.msg == false) {
+                            alert("Lỗi thêm bản ghi");
+                        }
+                        else {
+                            alert("Thêm bản ghi thành công");
+                            window.location.href = "/Admin/NguoiDungs/Index"
+                        }
+                    });
+                };
+            });
+        </script>
+    }
+</div>
+

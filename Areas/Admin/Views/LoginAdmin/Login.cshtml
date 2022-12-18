@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>aranoz</title>
+    <link rel="icon" href="img/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="~/Content/css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="~/Content/css/all.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="~/Content/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/css/themify-icons.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="~/Content/css/slick.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="~/Content/css/style.css">
+</head>
+
+<body>
+
+    <!--================login_part Area =================-->
+    <section class="login_part padding_top" style="background-image: url('../../../../content/img/login/background_login.jpg')">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6" style="margin:auto">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner p-3">
+
+                            @using (Html.BeginForm("Login", "LoginAdmin", FormMethod.Post))
+                            {
+                                <h4 class="mb-md-3 text-center text-white">
+                                    ĐĂNG NHẬP HỆ THỐNG
+                                </h4>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="name" name="name" required value=""
+                                           placeholder="Tên đăng nhập">
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="password" name="password" required value=""
+                                           placeholder="Mật khẩu">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    @*<div class="creat_account d-flex align-items-center">
+                                            <input type="checkbox" id="f-option" name="selector">
+                                            <label for="f-option">Lưu mật khẩu</label>
+                                        </div>*@
+                                    @Html.Raw(ViewBag.Error)
+                                    <button type="submit" value="submit" class="btn_3">
+                                        Đăng nhập
+                                    </button>
+
+                                    <a class="lost_pass" href="#">forget password?</a>
+                                </div>
+
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================login_part end =================-->
+    <!--::footer_part end::-->
+    <!-- jquery plugins here-->
+    <!-- jquery -->
+    <!--<script src="~/Content/js/jquery-1.12.1.min.js"></script>-->
+    <!-- popper js -->
+    <!--<script src="~/Content/js/popper.min.js"></script>-->
+    <!-- bootstrap js -->
+    <!--<script src="~/Content/js/bootstrap.min.js"></script>-->
+    <!-- easing js -->
+    <!--<script src="~/Content/js/jquery.magnific-popup.js"></script>-->
+    <!-- swiper js -->
+    <!--<script src="~/Content/js/swiper.min.js"></script>-->
+    <!-- swiper js -->
+    <!--<script src="~/Content/js/masonry.pkgd.js"></script>-->
+    <!-- particles js -->
+    <!--<script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.nice-select.min.js"></script>-->
+    <!-- slick js -->
+    <!--<script src="~/Content/js/slick.min.js"></script>
+    <script src="~/Content/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/js/waypoints.min.js"></script>
+    <script src="~/Content/js/contact.js"></script>
+    <script src="~/Content/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/js/jquery.form.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/mail-script.js"></script>
+    <script src="~/Content/js/stellar.js"></script>
+    <script src="~/Content/js/price_rangs.js"></script>-->
+    <!-- custom js -->
+    <!--<script src="~/Content/js/custom.js"></script>-->
+</body>
+
+</html>
+

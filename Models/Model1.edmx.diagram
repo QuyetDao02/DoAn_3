@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="88c59378c6074148bc60bc87aa1d8312" Name="Diagram1">
+        <EntityTypeShape EntityType="DoAn3_MvcModel.ChiTietDonHangBan" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.ChiTietHoaDonNhap" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.DonHangBan" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.DoNoiThat" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.HoaDonNhap" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.KhachHang" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.LoaiDoNoiThat" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.NhanVien" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.TinTuc" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__ChiTietDo__MaDHB__2645B050" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__ChiTietDo__MaDNT__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__ChiTietHo__MaDNT__208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__ChiTietHo__MaHDN__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__DonHangBan__MaKH__236943A5" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__DoNoiThat__MaLDN__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__DoNoiThat__MaNCC__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__HoaDonNhap__MaNV__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__TinTuc__MaNV__2A164134" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DoAn3_MvcModel.NguoiDung" Width="1.5" PointX="0.75" PointY="12" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__KhachHang__MaKH__17036CC01" />
+        <AssociationConnector Association="DoAn3_MvcModel.FK__NhanVien__MaNV__19DFD96B1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

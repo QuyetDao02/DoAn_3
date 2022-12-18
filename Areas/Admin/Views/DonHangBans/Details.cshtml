@@ -1,0 +1,67 @@
+﻿@model DoAn3.Models.DonHangBan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DonHangBan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayLap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayLap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ghichu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ghichu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tongtien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tongtien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.TenKH)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDHB }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

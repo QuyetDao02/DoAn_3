@@ -1,0 +1,105 @@
+﻿@model DoAn3.Models.DoNoiThat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div ng-app="myapp" ng-controller="myctrl">
+
+    <h2>Chi tiết đồ nội thất: {{datas.TenDNT}}</h2>
+    <hr />
+    <dl class="">
+        <dt>
+            Tên đồ nội thất
+        </dt>
+
+        <dd>
+            {{datas.TenDNT}}
+        </dd>
+        <dt>
+            Loại dồ nội thất
+        </dt>
+
+        <dd>
+            {{datas.TenLDNT}}
+        </dd>
+
+        <dt>
+            Nhà cung cấp
+        </dt>
+
+        <dd>
+            {{datas.TenNCC}}
+        </dd>
+        <dt>
+            Hình ảnh
+        </dt>
+
+        <dd>
+            <img style="width:120px" ng-src="{{datas.HinhAnh}}" />
+        </dd>
+
+        <dt>
+            Giá
+        </dt>
+
+        <dd>
+            {{datas.Gia}}
+        </dd>
+
+        <dt>
+            Số lượng
+        </dt>
+
+        <dd>
+            {{datas.soluong}}
+        </dd>
+
+        <dt>
+            Kich cỡ
+        </dt>
+
+        <dd>
+            {{datas.Kichco}}
+        </dd>
+
+        <dt>
+            Mô tả
+        </dt>
+
+        <dd ng-bind-html="MoTa">
+            
+        </dd>
+    </dl>
+    <a ng-click="edit()" class="btn btn-success"><i class="fa fa-pen-square"></i> Sửa</a>
+    <a class="btn btn-facebook" href="~/Admin/DoNoiThats/Index"><i class="fa fa-backward"></i> Quay lại</a>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.MaDNT }) |
+        @Html.ActionLink("Back to List", "Index")*@
+</p>
+@section Scripts{
+
+    <script>
+        var myapp = angular.module("myapp", ['ngSanitize']);
+        myapp.controller("myctrl", function ($scope, $http) {
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            $http({
+                url: "/Admin/DoNoiThats/DetailsData/?id=" + id,
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.datas = res.data;
+                $scope.MoTa = $scope.datas.MoTa
+            });
+
+            $scope.edit = function () {
+                window.location.href = "/Admin/DoNoiThats/EditData/" + id;
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.8.3/angular-sanitize.js"; integrity="sha512-WsrQol2t85bun8XdIkjqTbNLgY54bCBgVZw+B+00eVritDAlCAcfYo92/53rFp63cKZpDa7t5r5lDDeKFcbUAQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+}

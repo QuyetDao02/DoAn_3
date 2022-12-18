@@ -1,0 +1,7 @@
+﻿@model IEnumerable<DoAn3.Models.LoaiDoNoiThat>
+
+@foreach (var item in Model)
+{
+    <a class="dropdown-item" href="/Home/Category/@item.MaLDNT">@item.TenLDNT</a>
+}
+

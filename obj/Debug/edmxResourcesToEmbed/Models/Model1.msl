@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DoAn3_MvcModelStoreContainer" CdmEntityContainer="DoAn3_MvcEntities">
+    <EntitySetMapping Name="ChiTietDonHangBans">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.ChiTietDonHangBan">
+        <MappingFragment StoreEntitySet="ChiTietDonHangBan">
+          <ScalarProperty Name="MaDHB" ColumnName="MaDHB" />
+          <ScalarProperty Name="MaDNT" ColumnName="MaDNT" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="Gia" ColumnName="Gia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChiTietHoaDonNhaps">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.ChiTietHoaDonNhap">
+        <MappingFragment StoreEntitySet="ChiTietHoaDonNhap">
+          <ScalarProperty Name="MaHDN" ColumnName="MaHDN" />
+          <ScalarProperty Name="MaDNT" ColumnName="MaDNT" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="Gia" ColumnName="Gia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonHangBans">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.DonHangBan">
+        <MappingFragment StoreEntitySet="DonHangBan">
+          <ScalarProperty Name="MaDHB" ColumnName="MaDHB" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
+          <ScalarProperty Name="Tongtien" ColumnName="Tongtien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DoNoiThats">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.DoNoiThat">
+        <MappingFragment StoreEntitySet="DoNoiThat">
+          <ScalarProperty Name="MaDNT" ColumnName="MaDNT" />
+          <ScalarProperty Name="TenDNT" ColumnName="TenDNT" />
+          <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+          <ScalarProperty Name="MaLDNT" ColumnName="MaLDNT" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="Gia" ColumnName="Gia" />
+          <ScalarProperty Name="Kichco" ColumnName="Kichco" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="soluong" ColumnName="soluong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HoaDonNhaps">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.HoaDonNhap">
+        <MappingFragment StoreEntitySet="HoaDonNhap">
+          <ScalarProperty Name="MaHDN" ColumnName="MaHDN" />
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="Ngaylap" ColumnName="Ngaylap" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KhachHangs">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.KhachHang">
+        <MappingFragment StoreEntitySet="KhachHang">
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+          <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoaiDoNoiThats">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.LoaiDoNoiThat">
+        <MappingFragment StoreEntitySet="LoaiDoNoiThat">
+          <ScalarProperty Name="MaLDNT" ColumnName="MaLDNT" />
+          <ScalarProperty Name="TenLDNT" ColumnName="TenLDNT" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhaCungCaps">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.NhaCungCap">
+        <MappingFragment StoreEntitySet="NhaCungCap">
+          <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+          <ScalarProperty Name="TenNCC" ColumnName="TenNCC" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhanViens">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.NhanVien">
+        <MappingFragment StoreEntitySet="NhanVien">
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+          <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+          <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TinTucs">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.TinTuc">
+        <MappingFragment StoreEntitySet="TinTuc">
+          <ScalarProperty Name="anh" ColumnName="anh" />
+          <ScalarProperty Name="MaTT" ColumnName="MaTT" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NguoiDungs">
+      <EntityTypeMapping TypeName="DoAn3_MvcModel.NguoiDung">
+        <MappingFragment StoreEntitySet="NguoiDung">
+          <ScalarProperty Name="roles" ColumnName="roles" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

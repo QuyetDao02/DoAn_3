@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm thông tin đồ nội thất</h2>
+
+<div class="container-fluid" ng-app="myApp" ng-controller="myctrl">
+
+    <form ng-submit="addData()">
+        @Html.AntiForgeryToken()
+        <div>
+            <div style="display:flex">
+
+                <hr />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Tên đồ nội thất
+                        <div class="col-md-10">
+                            <input type="text" ng-model="SanPham.TenDNT" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        Nhà cung cấp
+                        <div class="col-md-10">
+                            @*<input type="text" ng-model="SanPham.MaNCC" class="form-control" />*@
+                            <select class="form-control" ng-model="SanPham.MaNCC" ng-options="x.MaNCC as x.TenNCC for x in listncc">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        Loại đồ nội thất
+                        <div class="col-md-10">
+                            @*<input type="text" ng-model="SanPham.MaLDNT" class="form-control" />*@
+                            <select class="form-control" ng-model="SanPham.MaLDNT" ng-options="x.MaLDNT as x.TenLDNT for x in listcate">
+                            </select>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Giá
+                        <div class="col-md-10">
+                            <input type="number" ng-model="SanPham.Gia" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        Kích cỡ
+                        <div class="col-md-10">
+                            <input type="text" ng-model="SanPham.Kichco" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        Số lượng
+                        <div class="col-md-10">
+                            <input type="number" ng-model="SanPham.soluong" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                Hình ảnh
+                @*<div class="col-md-10">
+            <input type="file" id="file1" name="file1" />
+        </div>*@
+                <div class="col-md-5">
+
+
+                    <button type="button" class="btn-default" ng-click="ChooseImage()">Chọn ảnh</button>
+                    <br />
+                    <br />
+                    <img style="width:100px;height:100px;" src="{{SanPham.HinhAnh}}" />
+                    <input type="text" class="form-control" name="image" ng-model="SanPham.HinhAnh" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                Mô tả
+                <div class="col-md-10">
+                    @*<input type="text" ng-model="SanPham.MoTa" class="form-control" />*@
+                    <textarea ng-model="SanPham.MoTa" name="mota" class="form-control" id="mota"></textarea>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-warning" type="submit">Thêm mới</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts {
+    <script>
+        CKEDITOR.replace('mota');
+    </script>
+    <script>
+        var myApp = angular.module('myApp', []);
+        myApp.controller('myctrl', function ($scope, $http, $httpParamSerializerJQLike) {
+            $scope.SanPham = {};
+            $scope.addData = function () {
+                var des = CKEDITOR.instances.mota.getData();
+                $scope.SanPham.MoTa = des;
+                Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                $scope.SanPham.__RequestVerificationToken = Token;
+                dataRequest = $scope.SanPham;
+                console.log(dataRequest);
+                $http({
+                    method: 'POST',
+                    url: '/Admin/DoNoiThats/Create',
+                    data: $httpParamSerializerJQLike(dataRequest),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+                }).then(function (res) {
+                    if (res.data.msg == false) {
+                        alert("Lỗi thêm bản ghi");
+                    }
+                    else {
+                        alert("Thêm bản ghi thành công");
+                        window.location.href = "/Admin/DoNoiThats/Index"
+                    }
+                });
+
+            };
+            $http({
+                url: "/Admin/LoaiDoNoiThats/getAll",
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.listcate = res.data;
+                console.log($scope.listcate);
+            });
+
+            $http({
+                url: "/Admin/NhaCungCaps/getAll",
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.listncc = res.data;
+                console.log($scope.listncc);
+            });
+
+            //Chọn file ckfinder
+            $scope.ChooseImage = function () {
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (fileUrl) {
+                    $scope.SanPham.HinhAnh = fileUrl;
+                }
+                finder.popup();
+            }
+        });
+    </script>
+}

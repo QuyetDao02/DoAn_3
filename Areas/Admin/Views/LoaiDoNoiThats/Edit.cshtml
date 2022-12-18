@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid" ng-app="appdetail" ng-controller="ctrldetail">
+    <form ng-submit="savedata()">
+        @Html.AntiForgeryToken()
+        <h4>Sửa thông tin loại đồ nội thất</h4>
+        <hr />
+        <div class="col-md-5">
+            <div class="form-group">
+                <div class="col-md-12">
+                    Tên loại đồ nội thất
+                </div>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" ng-model="products.TenLDNT" />
+                </div>
+                <br />
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-7">
+
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    Mô tả
+                </div>
+                <div class="col-md-10">
+                    <textarea ng-model="products.MoTa" class="form-control" name="mota" id="mota"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 mt-2">
+                    <button type="submit" class="btn btn-primary fa fa-save"> Lưu & thay đổi </button>
+                    <a href="~/Admin/LoaiDoNoiThats/Index"> Quay về</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </form>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var myapp = angular.module('appdetail', [])
+        myapp.controller('ctrldetail', function ($scope, $http, $httpParamSerializerJQLike) {
+
+            $scope.products = {};
+
+
+            //Lấy mã sản phẩm hiển thị thông tin
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/')+1);
+            $http({
+                url: "/Admin/LoaiDoNoiThats/DetailsData/?id=" + id,
+                method: "GET"
+            }
+            ).then(function (res) {
+                $scope.products = res.data;
+                console.log($scope.products)
+            });
+
+            //Thêm dữ liệu vào cơ sở dữ liệu
+            $scope.savedata = function () {
+                //var des = CKEDITOR.instances.mota.getData();
+             /*   $scope.products.Description = des;*/
+                Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                $scope.products.__RequestVerificationToken = Token;
+                dataRequest = $scope.products;
+                console.log(dataRequest);
+                $http({
+                    method: 'POST',
+                    url: '/Admin/LoaiDoNoiThats/Edit',
+                    data: $httpParamSerializerJQLike(dataRequest),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+                }).then(function (res) {
+                    if (res.data == false) {
+                        alert("Lỗi sửa đổi bản ghi");
+                    }
+                    else {
+                        alert("Thay đổi thông tin sản phẩm thành công");
+                        window.location.href = "/Admin/LoaiDoNoiThats/Index";
+                        window.location.reload;
+                    }
+                });
+
+            }
+
+
+        });
+
+    </script>
+}
+

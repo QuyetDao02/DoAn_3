@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm loại đồ nội thất</h2>
+
+<div class="container-fluid" ng-app="myApp" ng-controller="myctrl">
+
+    <form ng-submit="addData()">
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                Tên loại đồ nội thất
+                <div class="col-md-10">
+                    <input type="text" ng-model="Loaisp.TenLDNT" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                Mô tả
+                <div class="col-md-10">
+                    <input type="text" ng-model="Loaisp.MoTa" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-warning" type="submit">Thêm mới</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </form>
+
+    @section scripts {
+
+        <script>
+            var myApp = angular.module('myApp', []);
+            myApp.controller('myctrl', function ($scope, $http, $httpParamSerializerJQLike) {
+                $scope.Loaisp = {};
+                $scope.addData = function () {
+                    Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                    $scope.Loaisp.__RequestVerificationToken = Token;
+                    dataRequest = $scope.Loaisp;
+                    console.log(dataRequest);
+                    $http({
+                        method: 'POST',
+                        url: '/Admin/LoaiDoNoiThats/Create',
+                        data: $httpParamSerializerJQLike(dataRequest),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+                    }).then(function (res) {
+                        if (res.data.msg == false) {
+                            alert("Lỗi thêm bản ghi");
+                        }
+                        else {
+                            alert("Thêm bản ghi thành công");
+                            window.location.href = "/Admin/LoaiDoNoiThats/Index"
+                        }
+                    });
+                };
+            });
+        </script>
+    }
+</div>
